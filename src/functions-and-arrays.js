@@ -77,6 +77,25 @@ function averageWordLength(arr){
   }
   return letraPromTotal/=arr.length;
 }
+
+function avg(arr){
+  var sumTotal=0;
+  if(arr.length===0){
+    return null;
+  }
+  for(var i=0; i<arr.length; i++){
+    if(arr[i]===true){
+      sumTotal+=1;
+    } else if(arr[i]>0 || arr[i]<=0){
+      sumTotal+=arr[i];
+   } else {
+     sumTotal+=arr[i].length;
+   }
+    
+  }
+  var arreglo=sumTotal/arr.length;
+  return arreglo;
+}
 // Iteration #5: Unique arrays
 const wordsUnique = [
   'crab',
@@ -94,8 +113,16 @@ const wordsUnique = [
 
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
-function doesWordExist(arr, name){
-  return arr[i]===name;
+function doesWordExist(arr,str){
+  if(arr.length===0){
+    return null;
+  }
+  for(var i=0; i<arr.length; i++){
+    if(str===arr[i]){
+      return true;
+    }
+  }
+  return false;
 }
 // Iteration #7: Count repetition
 const wordsCount = [
@@ -111,7 +138,18 @@ const wordsCount = [
   'disobedience',
   'matter'
 ];
-
+function howManyTimes(arr,str){
+  var numrep=0;
+  if(arr.length===0){
+    return numrep;
+  }
+  for(var i=0; i<arr.length; i++){
+    if(str===arr[i]){
+      numrep+=1;
+    }
+  }
+  return numrep;
+}
 // Iteration #8: Bonus
 
 const matrix = [
@@ -136,3 +174,20 @@ const matrix = [
   [20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54],
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
+function greatestProduct(arr){
+  var masAlto=0;
+  var prom=0;
+  var promdos=0;
+  for(var i=0; i<arr.length; i++){
+    for(var j=0; j<arr[i].length-3; j++)
+    prom=arr[i][j]*arr[i][j+1]*arr[1][j+2]*arr[i][j+3];
+    if(prom>masAlto){
+      masAlto=prom;
+    }
+    promdos=arr[i][j]*arr[i][j+20]*arr[i][j+40]*arr[i][j+60];
+    if(promdos>masAlto){
+      masAlto=promdos;
+    }
+  }
+  return masAlto;
+}
