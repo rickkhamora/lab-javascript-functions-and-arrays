@@ -40,12 +40,14 @@ function sum(arr){
     return sumTotal;
   }
   for(var i=0; i<arr.length; i++){
-    if(arr[i]===true){
-      sumTotal+=1;
-    } else if(arr[i]>0 || arr[i]<=0){
+    if(typeof arr[i]==="boolean"){
+      sumTotal+=arr[i]?1:0;
+    } else if(typeof arr[i]==="number"){
       sumTotal+=arr[i];
-   } else {
+   } else if(typeof arr[i]==="string"){
      sumTotal+=arr[i].length;
+   } else {
+     throw new Error("Unsupported data type sir or ma'am");
    }
     
   }
@@ -86,15 +88,17 @@ function avg(arr){
   for(var i=0; i<arr.length; i++){
     if(arr[i]===true){
       sumTotal+=1;
-    } else if(arr[i]>0 || arr[i]<=0){
+    } else if(typeof arr[i]==="number"){
       sumTotal+=arr[i];
-   } else {
+   } else if(typeof arr[i]==="string"){
      sumTotal+=arr[i].length;
+   } else {
+     sumTotal+=0;
    }
     
   }
   var arreglo=sumTotal/arr.length;
-  return arreglo;
+  return Number(arreglo.toFixed(2));
 }
 // Iteration #5: Unique arrays
 const wordsUnique = [
@@ -110,6 +114,19 @@ const wordsUnique = [
   'simple',
   'bring'
 ];
+function uniquifyArray(arr){
+  var newWords = [];
+  if(arr.length===0){
+    return null;
+  }
+    for(var i=0; i<arr.length; i++){
+      indice=newWords.indexOf(arr[i]);
+      if(indice === -1){
+        newWords.push(arr[i]);
+      }
+    }
+     return newWords;
+  }
 
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
@@ -179,14 +196,18 @@ function greatestProduct(arr){
   var prom=0;
   var promdos=0;
   for(var i=0; i<arr.length; i++){
-    for(var j=0; j<arr[i].length-3; j++)
-    prom=arr[i][j]*arr[i][j+1]*arr[1][j+2]*arr[i][j+3];
+    for(var j=0; j<arr[i].length; j++)
+    if (j<arr[i].length-3){
+      prom=arr[i][j]*arr[i][j+1]*arr[1][j+2]*arr[i][j+3];
     if(prom>masAlto){
       masAlto=prom;
     }
-    promdos=arr[i][j]*arr[i][j+20]*arr[i][j+40]*arr[i][j+60];
+   }
+   if(i<arr.length-3){ 
+    promdos=arr[i][j]*arr[i+1][j]*arr[i+2][j]*arr[i+3][j];
     if(promdos>masAlto){
       masAlto=promdos;
+    }
     }
   }
   return masAlto;
